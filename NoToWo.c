@@ -117,7 +117,6 @@ void NoToWo(int no) {
         no *= -1;
         printf("minus ");
     }
-    // str[i++] = '-';
     while(no) {
         str[i++] = (no % 10) + 48;
         no /= 10;
@@ -150,67 +149,66 @@ void NoToWo(int no) {
                 if(str[i] == '0')
                     continue;
                 spellOnesDigit(str[i]);
-                printf("hundred, ");
+                printf("hundred ");
                 break;
             case 4:
                 if(str[i] == '0')
                     continue;
                 spellOnesDigit(str[i]);
-                printf("thousand, ");
+                printf("thousand ");
                 break;
             case 5:
                 if(str[i] == '0')
                     continue;
                 if(str[i] == '1' && str[i + 1] > 48) {
                     spellEleven(str[++i]);
-                    printf("thousand, ");
+                    printf("thousand ");
                     continue;
                 }
                 spellTensDigit(str[i]);
                 spellOnesDigit(str[++i]);
-                printf("thousand, ");
+                printf("thousand ");
                 break;
             case 6:
                 if(str[i] == '0')
                     continue;
                 spellOnesDigit(str[i]);
-                printf("lakh, ");
+                printf("lakh ");
                 break;
             case 7:
                 if(str[i] == '0')
                     continue;
                 if(str[i] == '1' && str[i + 1] > 48) {
                     spellEleven(str[++i]);
-                    printf("lakh, ");
+                    printf("lakh ");
                     continue;
                 }
                 spellTensDigit(str[i]);
                 spellOnesDigit(str[++i]);
-                printf("lakh, ");
+                printf("lakh ");
                 break;
             case 8:
                 if(str[i] == '0')
                     continue;
                 spellOnesDigit(str[i]);
-                printf("crore, ");
+                printf("crore ");
                 break;
             case 9:
                 if(str[i] == '0')
                     continue;
                 if(str[i] == '1' && str[i + 1] > 48) {
                     spellEleven(str[++i]);
-                    printf("crore, ");
+                    printf("crore ");
                     continue;
                 }
                 spellTensDigit(str[i]);
                 spellOnesDigit(str[++i]);
-                printf("crore, ");
+                printf("crore ");
                 break;
             default: 
                 continue;
         }
     }
-    printf("only.");
     return;
 }
 
