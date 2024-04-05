@@ -1,2 +1,4 @@
 # MiscellaneousPrograms
-My repo for storing the various programs I write.
+My repo for miscellaneous programs by single me :p
+# WARNING!
+This repo was earlier named as <b>M</b>iscellaneousPrograms. Some workflows earlier redirecting to this repo still work using both <b>m</b> and <b>M</b>. Be careful in naming a future repo as <b>M</b>iscellaneousPrograms! The redirects may stop working!
