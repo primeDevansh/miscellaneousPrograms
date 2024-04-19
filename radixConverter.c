@@ -118,8 +118,24 @@ void testQueue() {
     return;
 }
 
+//we can make it more abstract by introducing 'base' variable and performing all operations on 'base' instead of absolute values.
+void decToBin(void) {
+    int no;
+    printf("Enter base-10 number : ");
+    scanf("%d", &no);
+
+    int copy = no;
+    //stack comes into play
+    while(copy) {
+        pushStack((copy % 2) + 48);
+        copy /= 2;
+    }
+
+    popStackAll();
+    return;
+}
+
 int main() {
-    testStack();
-    testQueue();
+    decToBin();
     return 0;
 }
