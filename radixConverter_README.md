@@ -1,6 +1,8 @@
 # Radix Converter
 
-A prpgram written in 'C' intended to perform number-base conversions.
+A program written in 'C' intended to perform number-base conversions.
+
+I will use stack and queue for performing number-base conversions and hence the following sections may contain discussions about stack and queues.
 
 ### Why track both, first and last elements of a Queue?
 

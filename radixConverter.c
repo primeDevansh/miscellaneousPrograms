@@ -37,6 +37,7 @@ void popStackAll() {
             topStack = topStack -> prev;
             free(temp);
         }
+        printf("\n");
     }
     return;
 }
@@ -80,12 +81,13 @@ void deQueueAll() {
     }
     else {
         struct elementQueue* temp = firstQueue;
-        while(firstQueue -> next) {
+        while(firstQueue) {
             printf("%c ", firstQueue -> val);
             temp = firstQueue;
             firstQueue = firstQueue -> next;
             free(temp);
         }
+        printf("\n");
     }
     return;
 }
@@ -93,22 +95,27 @@ void deQueueAll() {
 //testing functions
 
 void testStack() {
+    printf("Stack Elements: - \n");
     for(int i = 0; i < 10; i++) {
-        pushStack(i + 66);
+        printf("Add %c to Stack.\n", i + 65);
+        pushStack(i + 65);
     }
-    for(int i = 0; i < 10; i++) {
-        popStackAll();
-    }
+    printf("\nPerforming Pop Stack (FILO): - \n");
+    popStackAll();
+    printf("\n");
     return;
 }
 
 void testQueue() {
+    printf("Queue Elements: - \n");
     for(int i = 0; i < 10; i++) {
-        enQueue(i + 66);
+        printf("Add %c to Queue.\n", i + 65);
+        enQueue(i + 65);
     }
-    for(int i = 0; i < 10; i++) {
-        deQueueAll();
-    }
+    printf("\nPerforming DeQueue (FIFO): - \n");
+    deQueueAll();
+    printf("\n");
+    return;
 }
 
 int main() {
