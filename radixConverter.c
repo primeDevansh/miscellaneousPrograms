@@ -126,6 +126,11 @@ void decToBin(void) {
     printf("Enter base-10 number : ");
     scanf("%d", &no);
 
+    if(no == 0) {
+        pushStack(48);
+        popStackAll();
+        return;
+    }
     int copy = no;
     //stack comes into play
     while(copy) {

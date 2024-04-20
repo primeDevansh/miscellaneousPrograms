@@ -55,3 +55,49 @@ Implementation Flexibility: Keeping track of both the first and last elements al
 While it's technically possible to implement a queue with just a pointer to the first element, maintaining a pointer to the last element significantly improves the efficiency and simplicity of enqueue and dequeue operations, making the queue more practical for real-world use cases.
 ```
 ---
+
+### A Mistake!
+---
+#### Original Code
+```C
+void popStackAll() {
+    if(topStack == NULL) {
+        printf("Stack empty! - Underflow");
+    }
+    else {
+        struct elementStack* temp = NULL;
+        while(topStack) {
+            printf("%c ", topStack -> val);
+            temp = topStack;
+            topStack = topStack -> prev;
+            free(temp);
+        }
+        printf("\n");
+    }
+    return;
+}
+```
+> Mistake: After popping all elements from the stack, you should set topStack to NULL to signify an empty stack. Otherwise, topStack will still point to the last element that was popped, which could lead to undefined behavior if you attempt to use the stack after popping all elements.
+
+#### Corrected Code!
+```C
+void popStackAll() {
+    if(topStack == NULL) {
+        printf("Stack empty! - Underflow\n");
+    }
+    else {
+        struct elementStack* temp = NULL;
+        while(topStack) {
+            printf("%c ", topStack -> val);
+            temp = topStack;
+            topStack = topStack -> prev;
+            free(temp);
+        }
+        printf("\n");
+        topStack = NULL; // Reset topStack to NULL to signify an empty stack
+    }
+    return;
+}
+```
+> I committed a similar mistake in dequeuing as well and corrected it accordingly.
+---
