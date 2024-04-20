@@ -27,17 +27,16 @@ void pushStack(char ch) {
 
 void popStackAll() {
     if(topStack == NULL) {
-        printf("Stack empty! - Underflow");
+        printf("0");
     }
     else {
         struct elementStack* temp = NULL;
         while(topStack) {
-            printf("%c ", topStack -> val);
+            printf("%c", topStack -> val);
             temp = topStack;
             topStack = topStack -> prev;
             free(temp);
         }
-        printf("\n");
         topStack = NULL; //Reset topStack to NULL to signify an empty stack
     }
     return;
@@ -83,12 +82,11 @@ void deQueueAll() {
     else {
         struct elementQueue* temp = firstQueue;
         while(firstQueue) {
-            printf("%c ", firstQueue -> val);
+            printf("%c", firstQueue -> val);
             temp = firstQueue;
             firstQueue = firstQueue -> next;
             free(temp);
         }
-        printf("\n");
         firstQueue = lastQueue = NULL;
     }
     return;
@@ -120,25 +118,61 @@ void testQueue() {
     return;
 }
 
-//we can make it more abstract by introducing 'base' variable and performing all operations on 'base' instead of absolute values.
-void decToBin(void) {
-    int no;
-    printf("Enter base-10 number : ");
-    scanf("%d", &no);
-
+void decToBin_beforeRadixPoint(float no) {
     if(no == 0) {
         pushStack(48);
         popStackAll();
         return;
     }
+    
     int copy = no;
+
     //stack comes into play
     while(copy) {
         pushStack((copy % 2) + 48);
         copy /= 2;
     }
+    return;
+}
 
+//to what degree of precision we need the result e.g. 0.1001 is a result till 4 degrees of precision
+int precisionRequired = 8;
+
+float fractionalPart(float x) {
+    int integer = x;
+    return (x - integer);
+}
+
+void decToBin_afterRadixPoint(float no) {
+    float frPt = fractionalPart(no);
+    int precisionReached = 1;
+
+    if(frPt == 0) {
+        enQueue(48);
+        return;
+    }
+
+    while(frPt != 0 && precisionReached <= precisionRequired) {
+        enQueue(((int)(frPt = frPt * 2)) + 48);
+        frPt = fractionalPart(frPt);
+        precisionReached++;
+    }
+    return;
+}
+
+//we can make it more abstract by introducing 'base' variable and performing all operations on 'base' instead of absolute values.
+void decToBin(void) {
+    float no;
+    printf("Enter base-10 number: ");
+    scanf("%f", &no);
+
+    decToBin_beforeRadixPoint(no);
     popStackAll();
+    printf(".");
+    decToBin_afterRadixPoint(no);
+    deQueueAll();
+    printf("\n");
+
     return;
 }
 
