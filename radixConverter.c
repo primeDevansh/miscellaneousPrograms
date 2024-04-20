@@ -38,6 +38,7 @@ void popStackAll() {
             free(temp);
         }
         printf("\n");
+        topStack = NULL; //Reset topStack to NULL to signify an empty stack
     }
     return;
 }
@@ -88,6 +89,7 @@ void deQueueAll() {
             free(temp);
         }
         printf("\n");
+        firstQueue = lastQueue = NULL;
     }
     return;
 }
