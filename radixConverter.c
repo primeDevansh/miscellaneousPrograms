@@ -118,7 +118,10 @@ void testQueue() {
     return;
 }
 
-void decToBin_beforeRadixPoint(float no) {
+void decToBase_beforeRadixPoint(float no, int toBase) {
+    //what to add to 'raw' digit to make it a visible 'char' variable = charOffset
+    int charOffset;
+
     if(no == 0) {
         pushStack(48);
         popStackAll();
@@ -129,31 +132,35 @@ void decToBin_beforeRadixPoint(float no) {
 
     //stack comes into play
     while(copy) {
-        pushStack((copy % 2) + 48);
-        copy /= 2;
+        // copy % ... will be greater than 9 only when toBase is 16, so no need for a condition check
+        (copy % toBase > 9) ? (charOffset = 55) : (charOffset = 48);
+        pushStack((copy % toBase) + charOffset);
+        copy /= toBase;
     }
     return;
 }
-
-//to what degree of precision we need the result e.g. 0.1001 is a result till 4 degrees of precision
-int precisionRequired = 8;
 
 float fractionalPart(float x) {
     int integer = x;
     return (x - integer);
 }
 
-void decToBin_afterRadixPoint(float no) {
-    float frPt = fractionalPart(no);
+void decToBase_afterRadixPoint(float no, int toBase) {
+    //to what degree of precision we need the result e.g. 0.1001 is a result till 4 degrees of precision
+    int precisionRequired = 8;
     int precisionReached = 1;
+
+    float frPt = fractionalPart(no);
+    int charOffset;
 
     if(frPt == 0) {
         enQueue(48);
         return;
     }
 
-    while(frPt != 0 && precisionReached <= precisionRequired) {
-        enQueue(((int)(frPt = frPt * 2)) + 48);
+    while((frPt != 0) && (precisionReached <= precisionRequired)) {
+        ((int)(frPt * toBase) > 9) ? (charOffset = 55) : (charOffset = 48);
+        enQueue(((int)(frPt = frPt * toBase)) + charOffset);
         frPt = fractionalPart(frPt);
         precisionReached++;
     }
@@ -161,15 +168,16 @@ void decToBin_afterRadixPoint(float no) {
 }
 
 //we can make it more abstract by introducing 'base' variable and performing all operations on 'base' instead of absolute values.
-void decToBin(void) {
+void decToBase(int toBase) {
     float no;
     printf("Enter base-10 number: ");
     scanf("%f", &no);
 
-    decToBin_beforeRadixPoint(no);
+    printf("%f in base-%d is: ", no, toBase);
+    decToBase_beforeRadixPoint(no, toBase);
     popStackAll();
     printf(".");
-    decToBin_afterRadixPoint(no);
+    decToBase_afterRadixPoint(no, toBase);
     deQueueAll();
     printf("\n");
 
@@ -177,6 +185,6 @@ void decToBin(void) {
 }
 
 int main() {
-    decToBin();
+    decToBase(16);
     return 0;
 }

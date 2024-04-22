@@ -101,3 +101,17 @@ void popStackAll() {
 ```
 > I committed a similar mistake in dequeuing as well and corrected it accordingly.
 ---
+
+### Another Mistake! (Brackets could've put me behind bars!)
+---
+#### Original Code
+```C
+((int)(frPt * toBase > 9)) ? (charOffset = 55) : (charOffset = 48);
+```
+> Mistake: This is a code snippet from "decToBase_afterRadixPoint(float no, int toBase)" functoin definition. I wanted to extract integer coefficient for hex digit assignment. But, for the number 0.1234, I was getting the output as 0.1F@7248, '@' has ASCII value 64. The expression "frPt * toBase" had become greater than 9 (9.4464) and thus, charOffset had set itself to 55. It should've stayed to 48 only, reason being I wanted the comparison to happen between INT of "frPt * toBase" and not convert this to INT after comparison. Brackets! Brackets! Place them carefully!
+
+#### Corrected Code!
+```C
+((int)(frPt * toBase) > 9) ? (charOffset = 55) : (charOffset = 48);
+```
+---
