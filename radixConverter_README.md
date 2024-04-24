@@ -115,3 +115,11 @@ void popStackAll() {
 ((int)(frPt * toBase) > 9) ? (charOffset = 55) : (charOffset = 48);
 ```
 ---
+
+#### This File Is No Longer UPDATED!
+---
+The files, "radixConverter_README.md", "radixConverter.c" and "radixConverter" will not be updated from now on, as of 24.Apr.24. 
+
+For further updates, please visit [radixConverter](https://github.com/primeDevansh/radixConverter) repository. The code will be maintained and updated there only.
+
+---
